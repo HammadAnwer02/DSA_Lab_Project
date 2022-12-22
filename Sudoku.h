@@ -44,6 +44,7 @@ public:
         {
             for (size_t j = 0; j < 9; j++)
             {
+                cout << board[i][j] << endl;
             }
             cout << endl;
         }
@@ -77,6 +78,7 @@ public:
 
 bool Sudoku::canPlace(int num, Position &p)
 {
+   
     return !isInBox(num, p) && !isInRow(num, p) && !isInCol(num, p);
 }
 
@@ -87,10 +89,10 @@ bool Sudoku::isInRow(int num, Position &p)
     {
         if (board[p.y][x] == num && x != p.x)
         {
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 bool Sudoku::isInCol(int num, Position &p)
@@ -99,10 +101,10 @@ bool Sudoku::isInCol(int num, Position &p)
     {
         if (board[y][p.x] == num && y != p.y)
         {
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 bool Sudoku::isInBox(int num, Position &p)
@@ -119,12 +121,12 @@ bool Sudoku::isInBox(int num, Position &p)
         {
             if (board[i][j] == num && i != p.y && j != p.x)
             {
-                return false;
+                return true;
             }
         }
     }
 
-    return true;
+    return false;
 }
 
 void Sudoku::generateBoard()
@@ -137,7 +139,8 @@ void Sudoku::generateBoard()
             int num;
             do
             {
-                num = rand() * 9 + 1;
+                num = rand() % 9 + 1;
+                
             } while (!canPlace(num, p));
             board[i][j] = num;
         }
@@ -150,11 +153,11 @@ void Sudoku::generatePlayBoard()
     {
         int boxesCleared = 0;
 
-        while (boxesCleared != 0)
+        while (boxesCleared != 4)
         {
             for (int j = 0; j < 9; j++)
             {
-                int clearBox = rand() * 10 + 1;
+                int clearBox = rand() % 10 + 1;
                 if (clearBox > 5)
                 {
                     playBoard[i][j] = 0;
