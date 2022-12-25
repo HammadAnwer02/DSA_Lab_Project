@@ -2,41 +2,39 @@
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QLayoutItem>
-
-MainWindow::MainWindow(sudoku &w)
+#include <QIntValidator>
+MainWindow::MainWindow()
 {
-    widget = new QWidget(&w);
-    w.setCentralWidget(widget);
+    QGridLayout* layout = new QGridLayout;
 
-    playButton = new QPushButton("Play", widget);
-
-    playButton->setGeometry(QRect(QPoint(100, 100), QSize(200, 50)));
-
-    QGridLayout *layout = new QGridLayout(widget);
+    // Create the grid of QLineEdit widgets for the Sudoku board
     for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                QLineEdit *cell = new QLineEdit;
-                cell->setFont(QFont("Arial", 24));
-                cell->setMinimumSize(50, 50);
-                cell->setMaxLength(1);
-                cell->setInputMask("9");
-                cell->setAlignment(Qt::AlignCenter);
-                 cell->setEnabled(false); // disable the cell by default
-                layout->addWidget(cell, row, col);
-            }
-        }
-    QObject::connect(playButton, SIGNAL(clicked()), this, SLOT(startGame(layout)));
-    layout->addWidget(playButton, 9, 0, 1, 9);
-    widget->setLayout(layout);
-    w.show();
-}
-
-void MainWindow::startGame(QGridLayout *layout)
-{
-    for (int row = 0; row < 9; row++) {
-        for (int col = 0; col < 9; col++) {
-            QLineEdit *cell = qobject_cast<QLineEdit*>(layout->itemAtPosition(row, col)->widget());
-            cell->setEnabled(true);
-        }
+      for (int col = 0; col < 9; col++) {
+        grid[row][col] = new QLineEdit;
+        grid[row][col]->setMaxLength(1);  // Allow only one character to be entered
+        grid[row][col]->setAlignment(Qt::AlignCenter);
+        grid[row][col]->setEchoMode(QLineEdit::Password);  // Hide the user's input
+        grid[row][col]->setValidator(new QIntValidator(1, 9, grid[row][col]));  // Allow only integer input
+        grid[row][col]->setReadOnly(true);  // Set the widget to read-only
+        layout->addWidget(grid[row][col], row, col);
+      }
     }
-}
+
+    // Create the "Play" button
+    playButton = new QPushButton("Play");
+    layout->addWidget(playButton, 9, 0, 1, 9);
+
+    // Set the layout of the Sudoku board widget
+    setLayout(layout);
+
+    // Connect the "Play" button to a slot that enables all the QLineEdit widgets
+    connect(playButton, &QPushButton::clicked, [this]() {
+      for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+          grid[row][col]->setEchoMode(QLineEdit::Normal);  // Show the user's input
+          grid[row][col]->setReadOnly(false);  // Allow the user to edit the widget
+        }
+      }
+    });
+    }
+

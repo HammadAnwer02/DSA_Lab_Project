@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     sudoku w;
-    MainWindow window(w);
-
+    MainWindow board;
+    board.show();
     return a.exec();
 }

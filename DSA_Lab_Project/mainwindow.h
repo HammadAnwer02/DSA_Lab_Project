@@ -5,15 +5,16 @@
 #include <QPushButton>
 #include <QObject>
 #include <QGridLayout>
+#include <QLineEdit>
 class MainWindow : public QWidget
 {
     Q_OBJECT
 public:
-    MainWindow(sudoku &w);
+    MainWindow();
     void startGame(QGridLayout *layout);
 private:
-    QWidget *widget;
-    QPushButton *playButton;
+    QLineEdit* grid[9][9];
+      QPushButton* playButton;
 };
 
 #endif // MAINWINDOW_H
