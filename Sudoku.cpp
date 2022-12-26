@@ -134,7 +134,7 @@ void Sudoku::play()
     {
         numMistakes = 0;
         this->fill();
-        this->clearRandomSpots(40);
+        this->clearRandomSpots(2);
         this->setMaxMistakes(4);
 
         while (!gameWon() && !gameOver())
@@ -160,16 +160,23 @@ void Sudoku::play()
             if (isValid(rowInput, colInput, userInput))
             {
                 board[rowInput][colInput] = userInput;
+                numEmptySlots--;
             }
             else
             {
-                numMistakes++;
+                cout << "Uh Oh! Looks like you entered an incorrect input, Your mistake count is now: " << ++numMistakes << "\n";
+                cout << "The max number of mistakes you can do is : " << maxMistakes << endl;
             }
         }
 
         if (gameOver())
         {
             cout << "Game Over! You reached the max mistake count.\n";
+        }
+
+        if (gameWon())
+        {
+            cout << "Game Won!\n";
         }
 
         cout << "Would you like to play again? (Y/N): ";
