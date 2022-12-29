@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         sudoku.ui
         mainwindow.cpp
         mainwindow.h
+        sudukoboard.cpp
+        sudukoboard.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

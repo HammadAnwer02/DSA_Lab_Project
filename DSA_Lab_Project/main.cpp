@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     sudoku w;
     MainWindow board;
+    board.showFullScreen();
     board.show();
     return a.exec();
 }
