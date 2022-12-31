@@ -1,3 +1,5 @@
 [DSA_LAB_REPORT.docx](https://github.com/HammadAnwer02/DSA_Lab_Project/files/10327219/DSA_LAB_REPORT.docx)
 Introduction:
 The project we took was about developing a Sudoku game using what we had been taught in the course. Sudoku is a logic-based puzzle game that originated in Japan. It is played on a grid of 9 x 9 squares, divided into nine 3 x 3 sub-grids, or "boxes." The objective is to fill in the grid with the numbers 1 through 9 in such a way that each row, column, and box contains all of the numbers from 1 to 9, with no repeats.
+To play Sudoku, you must use logic and problem-solving skills to deduce which numbers go in which squares. Each puzzle has a unique solution, and the difficulty of the puzzle depends on how many numbers are already filled in. The more numbers that are given to start with, the easier the puzzle is.
+Sudoku has gained popularity around the world and is widely available in print and online. It is a popular activity for people of all ages and can be a fun way to improve logical thinking and problem-solving skills.
